@@ -1,3 +1,66 @@
+# Defining functions 
+
+# CAESAR 
+
+def Caesar_encrypt(message, key):
+    message = message.upper()
+    alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    output = ""
+
+    for letter in message:
+        if letter in alphabet: 
+            
+            letter_index = (alphabet.find(letter) + key) % len(alphabet)
+
+            output = output + alphabet[letter_index]
+        else:
+            output = output + letter
+
+    return output
+
+def Caesar_decrypt(message, key):
+    message = message.upper()
+    alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    output = ""
+
+    for letter in message:
+        if letter in alphabet:
+
+            letter_index = (alphabet.find(letter) - key) % len(alphabet)
+
+            output = output + alphabet[letter_index]
+        else:
+            output = output + letter
+
+    return output
+
+# VIGENERE
+def generateKey(message, key):
+    key = list(key)
+    if len(message) == len(key):
+        return(key)
+    else:
+        for i in range(len(message) - len(key)):
+            key.append(key[i % len(key)])
+    return("".join(key))
+
+def Vigenere_encrypt(message, key):
+    cipher_text = []
+    for i in range(len(message)):
+        x = (ord(message[i]) + ord(key[i])) % 26
+        x += ord('A')
+        cipher_text.append(chr(x))
+    return("".join(cipher_text))
+
+def Vigenere_decrypt(cipher_text, key):
+    plain_text = []
+    for i in range(len(cipher_text)):
+        x = (ord(cipher_text[i]) -
+             ord(key[i]) + 26) % 26
+        x += ord('A')
+        plain_text.append(chr(x))
+    return("".join(plain_text))
+
 print("WELCOME TO THE CAESAR AND VIGENERE ENCRYPTION AND DECRYPTION PROGRAM")
 while True:
     print("\nMAIN MENU")
